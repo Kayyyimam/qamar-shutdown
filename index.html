@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Qamar - Until Next Ramadan</title>
+    <meta name="description" content="Qamar Ramadan companion app - Returning Ramadan 1448">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #000000;
+            color: white;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Stars Background */
+        .stars-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle linear infinite;
+            box-shadow: 0 0 3px rgba(255, 255, 255, 0.8);
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.1; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+
+        /* Main Container */
+        .container {
+            position: relative;
+            z-index: 10;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 80px 20px 60px;
+        }
+
+        .content-wrapper {
+            max-width: 1200px;
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        /* Left Side - Message */
+        .message-section {
+            text-align: center;
+        }
+
+        .qamar-title {
+            font-family: 'Great Vibes', cursive;
+            font-size: 80px;
+            color: white;
+            opacity: 0.95;
+            margin-bottom: 40px;
+            font-weight: 400;
+        }
+
+        .main-heading {
+            font-size: 42px;
+            color: #D4AF37;
+            margin-bottom: 30px;
+            font-family: Georgia, serif;
+            line-height: 1.2;
+        }
+
+        .main-message {
+            font-size: 22px;
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.8;
+            margin-bottom: 20px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .sub-message {
+            font-size: 18px;
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.6;
+            margin-bottom: 40px;
+        }
+
+        /* Card Section */
+        .card-section {
+            display: flex;
+            justify-content: center;
+        }
+
+        .info-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 50px 40px;
+            max-width: 600px;
+            width: 100%;
+        }
+
+        .card-title {
+            font-size: 28px;
+            color: white;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 20px 15px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .stat-icon {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 5px;
+        }
+
+        .stat-value {
+            font-size: 16px;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 500;
+        }
+
+        /* Return Box */
+        .return-box {
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.15), rgba(212, 175, 55, 0.08));
+            border: 2px solid rgba(212, 175, 55, 0.3);
+            border-radius: 20px;
+            padding: 35px 30px;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .return-icon {
+            font-size: 56px;
+            margin-bottom: 15px;
+        }
+
+        .return-title {
+            font-size: 24px;
+            color: #ffffff;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+
+        .return-date {
+            font-size: 32px;
+            color: #D4AF37;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .return-note {
+            font-size: 15px;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* CTA */
+        .cta-text {
+            text-align: center;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        .cta-highlight {
+            color: #D4AF37;
+            font-weight: 600;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 40px 20px 20px;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 15px;
+        }
+
+        .hadith-quote {
+            font-style: italic;
+            margin-bottom: 10px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .hadith-attribution {
+            font-size: 13px;
+            margin-bottom: 25px;
+        }
+
+        .footer-blessing {
+            color: #D4AF37;
+            font-size: 17px;
+            margin-top: 20px;
+        }
+
+        /* Responsive */
+        @media (min-width: 1024px) {
+            .content-wrapper {
+                grid-template-columns: 1fr 1fr;
+                gap: 80px;
+            }
+
+            .message-section {
+                text-align: left;
+            }
+
+            .main-message,
+            .sub-message {
+                margin-left: 0;
+                margin-right: 0;
+            }
+
+            .qamar-title {
+                font-size: 100px;
+            }
+
+            .main-heading {
+                font-size: 52px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .qamar-title {
+                font-size: 60px;
+                margin-bottom: 30px;
+            }
+
+            .main-heading {
+                font-size: 32px;
+            }
+
+            .main-message {
+                font-size: 18px;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+
+            .info-card {
+                padding: 35px 25px;
+            }
+
+            .return-date {
+                font-size: 28px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Stars Background -->
+    <div class="stars-container" id="starsContainer"></div>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="content-wrapper">
+            <!-- Left Side - Message -->
+            <div class="message-section">
+                <h1 class="qamar-title">Qamar</h1>
+
+
+                <p class="main-message">
+                    JazakAllahu Khairan for using Qamar this blessed month.
+                </p>
+
+                <p class="sub-message">
+                    We hope it helped you stay consistent with your daily ibadahs
+                    and made this Ramadan more intentional and fulfilling.
+                </p>
+
+                <div class="hadith-quote">
+                    "The best deeds are the ones done consistently, even if they are small."
+                </div>
+                <div class="hadith-attribution">- Hadith -</div>
+            </div>
+
+            <!-- Right Side - Info Card -->
+            <div class="card-section">
+                <div class="info-card">
+                    <h3 class="card-title">What's Next?</h3>
+
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <div class="stat-icon">📊</div>
+                            <div class="stat-label">Your Data</div>
+                            <div class="stat-value">Check Email</div>
+                        </div>
+
+                        <div class="stat-item">
+                            <div class="stat-icon">🤲</div>
+                            <div class="stat-label">Keep Going</div>
+                            <div class="stat-value">Stay Consistent</div>
+                        </div>
+
+                    </div>
+
+                    <div class="return-box">
+                         <div class="return-title">Qamar Will Return</div>
+                        <div class="return-date">Ramadan 1448</div>
+                        <div class="return-note">Expected: February 2027  </div>
+                    </div>
+
+                    <div class="cta-text">
+                        We sent your <span class="cta-highlight">personal Ramadan summary</span>
+                        to your email. If you haven't received it, please check your spam folder.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <p>May Allah accept your deeds and grant you the best in this life and the next.</p>
+        <p class="footer-blessing">Taqabbal Allahu minna wa minkum 🤲</p>
+        <p style="margin-top: 30px; font-size: 13px; opacity: 0.4;">© 2026 Qamar - Ramadan App</p>
+    </div>
+
+    <script>
+        // Generate stars
+        function generateStars() {
+            const container = document.getElementById('starsContainer');
+            const starCount = 50;
+
+            for (let i = 0; i < starCount; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+
+                const size = Math.random() * 2.5 + 0.5;
+                const duration = Math.random() * 4 + 2;
+                const delay = Math.random() * 8;
+                const top = Math.random() * 100;
+                const left = Math.random() * 100;
+
+                star.style.width = size + 'px';
+                star.style.height = size + 'px';
+                star.style.top = top + '%';
+                star.style.left = left + '%';
+                star.style.animationDuration = duration + 's';
+                star.style.animationDelay = delay + 's';
+
+                container.appendChild(star);
+            }
+        }
+
+        generateStars();
+    </script>
+</body>
+</html>
